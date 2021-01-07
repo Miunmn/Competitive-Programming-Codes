@@ -1,19 +1,57 @@
 #include <iostream>
+#include <algorithm>
+
+#define ll long long int
+
 using namespace std;
+int main() {
+
+  ll t;
+  cin>>t;
+  ll arrX[t];
+  ll arrY[t];
+  for(int i = 0 ; i < t;i++){
+    ll x_;
+    ll y_;
+
+    cin>>x_;
+    cin>>y_;
+
+    arrX[i]=x_;
+    arrY[i]=y_;
 
 
-int main(){
-    using ll = long long int;
-    ll n;
-    cin>>n;
-    //cantidad total de formas de posicionar ambos caballos
-    for(ll i = 1; i <=n ; i++){
-        ll total = i*i * (i*i - 1);
-        //basicamente la idea es buscar cada caso y tratar de eliminarlo del total de casos posibles
-        // que seria (i*i * (i*i - 1))
-        ll ans = total - 8 - 24 - (i-4)*4*4 - 16 -(i-4)*4*6 - 8*(i-4)*(i-4); 
-        cout<<ans/2<<"\n";
+  }
+for (int i = 0 ; i < t; i++){
+  //cout << arrX[i]+arrY[i]<<"\n";
+  ll z = max(arrX[i] , arrY[i]);
+  ll z2 = (z-1)*(z-1),ans;
+  if(z%2){
+    if(arrY[i]==z){
+      cout<<z<<"\n";
+      cout<<"z impar and y==z\n";
+      ans = z2+arrX[i];
+    }else{
+      cout<<"z impar and y != z\n";
+      ans = z2+2*z-arrY[i];
     }
 
-    return 0;
+  }else{
+    if(arrX[i] == z){
+      cout<<"z par and x==z\n";
+      ans = z2+arrY[i];
+    }else{
+      cout<< "z par and x!=z\n";
+      ans = z2+2*z-arrX[i];
+    }
+  }
+
+
+  cout<<ans<<"\n";
 }
+
+
+
+  return 0;
+}
+
